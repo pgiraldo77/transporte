@@ -13,8 +13,13 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('foja_ruta', function (Blueprint $table) {
+        Schema::create('foja_rutas', function (Blueprint $table) {
             $table->id();
+            $table->integer('nro');
+            $table->float('m_cub_tot');
+            $table->date('fecha_sal');
+            $table->boolean('completo');
+            $table->String('observacion');
             $table->timestamps();
         });
     }
