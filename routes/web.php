@@ -3,6 +3,7 @@ use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\CocheController;
 use App\Http\Livewire\ShowCoches;
+use App\Http\Livewire\ShowFojaRutas;
 
 /*
 |--------------------------------------------------------------------------
@@ -40,3 +41,5 @@ Route::resource('coches',CocheController::class)->parameters(['coches'=>'coche']
 //Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', ShowCoches::class)->name('dashboard');
 
 Route::middleware(['auth:sanctum', 'verified'])->get('/mostrar', ShowCoches::class)->name('coches.mostrar');
+
+Route::middleware(['auth:sanctum', 'verified'])->get('/fojas', ShowFojaRutas::class)->name('fojas.show');

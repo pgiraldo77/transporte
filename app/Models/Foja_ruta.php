@@ -8,4 +8,6 @@ use Illuminate\Database\Eloquent\Model;
 class Foja_ruta extends Model
 {
     use HasFactory;
+
+    protected $fillable=['nro', 'm_cub_tot', 'fecha_sal', 'completo','observacion'];
 }
