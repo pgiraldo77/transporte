@@ -3,6 +3,8 @@
     <x-table>
         <div class="px-6 py-4 flex items-center">
             <input type="text" wire:model="search" class="flex-1 mr-4" placeholder="Escriba que está buscando">
+
+            @livewire('create-foja-rutas')
         </div>    
         
         @if ($fojas->count())
@@ -30,9 +32,9 @@
                             @endif
                         </th>
                         <th scope="col"
-                            class="cursor-pointer px-6 py-3 text-left text-xs font-medium text-gray->500 uppercase" 
+                            class="w-24 cursor-pointer px-6 py-3 text-left text-xs font-medium text-gray->500 uppercase" 
                             wire:click="order('nro')">
-                            Número Foja
+                            N° Foja Ruta
                             
                             {{--sort--}}
                             @if ($sort == 'nro')
@@ -154,7 +156,8 @@
                         <td class="px-6 py-4 text-sm text-gray-500">
                             {{$foja->observacion}}
                         </td>
-                        <td class="px-6 py-4 whitespace-nowrap text-sm font-medium">
+                        <td class="cursor-pointer px-6 py-4 whitespace-nowrap text-sm font-medium">
+                            
                             {{--@livewire('edit-foja',['fojas'=>$fojas],key($fojas->id))--}}
                         </td>
                     </tr>         
