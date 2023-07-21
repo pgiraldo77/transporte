@@ -5,6 +5,7 @@ namespace App\Http\Livewire;
 use Livewire\Component;
 use App\Models\Empresa;
 
+
 class ShowEmpresas extends Component
 {
     public $search;
@@ -15,10 +16,15 @@ class ShowEmpresas extends Component
 
     public function render()
     {
-        $empresas=Empresa::where('razon_social','like', '%'. $this->search . '%')
+        /*$empresas=Empresa::where('razon_social','like', '%'. $this->search . '%')
                         ->orwhere('cuit','like', '%'. $this->search . '%')
                         ->orderBy($this->sort,$this->direccion)
-                        ->get();         
+                        ->get();     */
+                        
+        $empresas=Empresa::where('razon_social','like', '%'. $this->search . '%')
+                          ->orwhere('cuit','like', '%'. $this->search . '%')
+                          ->join('emp_locs', 'empresas.id', '=', 'emp_locs.empresa_id')
+                          ->get();                 
 
         return view('livewire.show-empresas', compact('empresas'));                
     }
