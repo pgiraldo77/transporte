@@ -13,20 +13,19 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('remitos', function (Blueprint $table) {
+        Schema::create('emp_locs', function (Blueprint $table) {
             $table->id();
-            $table->string('nro',20);
-            $table->date('fecha');
-            $table->date('fecha_sello');
-            $table->foreign('factura_id')
+            $table->unsignedBigInteger('empresa_id')->nullable();
+            $table->foreign('empresa_id')
                    ->references('id')
-                   ->on('factura')
+                   ->on('empresas')
                    ->onDelete('set null');
-            $table->foreign('emp_loc_id')
+            $table->unsignedBigInteger('localidad_id')->nullable();       
+            $table->foreign('localidad_id')
                    ->references('id')
-                   ->on('emp_loc')
+                   ->on('localidades')
                    ->onDelete('set null');
-            $table->String('observacion');       
+            $table->String('direccion');       
             $table->timestamps();
         });
     }
@@ -38,6 +37,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('remitos');
+        Schema::dropIfExists('emp_locs');
     }
 };
