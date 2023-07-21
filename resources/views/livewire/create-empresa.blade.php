@@ -21,6 +21,20 @@
 
                 <x-input-error for="cuit" />
             </div> 
+            <div class="mb-4">
+                <x-label value="telefono" />
+                <x-input type="text" class="w-full" wire:model="telefono"/>
+
+                <x-input-error for="telefono" />
+            </div> 
+
+            <div class="mb-4">
+                <x-label value="direccion" />
+                <x-input type="text" class="w-full" wire:model="direccion"/>
+
+                <x-input-error for="direccion" />
+            </div> 
+
             
             @livewire('select-anidados')            
         </x-slot>
@@ -29,7 +43,7 @@
                 Cancelar
             </x-secondary-button>
             <x-danger-button wire:click="save" wire:loading.attr="disabled" wire:target="save, image" class="disabled:opacity-25">
-                Actualizar
+                Cargar
             </x-danger-button>
         </x-slot>
     </x-dialog-modal>    

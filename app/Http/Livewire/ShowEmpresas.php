@@ -12,15 +12,13 @@ class ShowEmpresas extends Component
     public $direccion='asc';
 
     protected $listeners = ['render'=>'render'];
-    
 
     public function render()
     {
-       /* $empresas=Empresa::where('razon_social','like', '%'. $this->search . '%')
+        $empresas=Empresa::where('razon_social','like', '%'. $this->search . '%')
                         ->orwhere('cuit','like', '%'. $this->search . '%')
                         ->orderBy($this->sort,$this->direccion)
-                        ->get();*/
-        $empresas=Empresa::all();                
+                        ->get();         
 
         return view('livewire.show-empresas', compact('empresas'));                
     }
@@ -39,5 +37,4 @@ class ShowEmpresas extends Component
         }   
    
     }
-
 }

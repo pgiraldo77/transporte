@@ -88,9 +88,6 @@
                             <x-dropdown-link :href="route('empresas.show')">
                                 {{ __('Mostrar') }}
                             </x-dropdown-link>
-
-                           
-                            </form>
                         </x-slot>
                     </x-dropdown>
                 </div>    

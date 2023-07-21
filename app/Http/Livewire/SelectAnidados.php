@@ -10,6 +10,7 @@ class SelectAnidados extends Component
 {
     public $provincias;
     public $localidades;
+    public $localidad_id;
 
       
     public function mount()
@@ -30,4 +31,7 @@ class SelectAnidados extends Component
         $this->localidades = Localidad::where('id_provincia', $value)->get();
     }
   
+    public function selectLocalidad($value){
+        $this->emit('asignar_localidad_id', $value);
+    }
 }

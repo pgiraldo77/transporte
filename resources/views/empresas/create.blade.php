@@ -1,7 +1,7 @@
 <x-app-layout>
     
     <div class="class="container mx-auto">
-        @liveware('create-empresa')
+        @livewire('create-empresa')
     </div>
 
 </x-app-layout>

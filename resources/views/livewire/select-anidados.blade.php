@@ -11,7 +11,7 @@
     </br>
     <div>
         <label for="localidad">Localidad :</label>
-        <select id="localidad">
+        <select id="localidad" wire:change="selectLocalidad($event.target.value)">
             <option value="">Seleccione una localidad</option>
             @foreach ($localidades as $localidad)
                 <option value="{{ $localidad->id }}">{{ $localidad->nombre }}</option>

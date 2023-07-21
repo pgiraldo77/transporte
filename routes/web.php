@@ -48,4 +48,4 @@ Route::middleware(['auth:sanctum', 'verified'])->get('/fojas', ShowFojaRutas::cl
 
 //Route::middleware(['auth:sanctum', 'verified'])->get('/empresas', CreateEmpresa::class)->name('empresas.create');
 
-Route::middleware(['auth:sanctum', 'verified'])->get('/empresas', CreateEmpresa::class)->name('empresas.show');
+Route::middleware(['auth:sanctum', 'verified'])->get('/empresas', ShowEmpresas::class)->name('empresas.show');
