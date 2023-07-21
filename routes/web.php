@@ -4,6 +4,8 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\CocheController;
 use App\Http\Livewire\ShowCoches;
 use App\Http\Livewire\ShowFojaRutas;
+use App\Http\Livewire\CreateEmpresa;
+use App\Http\Livewire\ShowEmpresas;
 
 /*
 |--------------------------------------------------------------------------
@@ -43,3 +45,7 @@ Route::resource('coches',CocheController::class)->parameters(['coches'=>'coche']
 Route::middleware(['auth:sanctum', 'verified'])->get('/mostrar', ShowCoches::class)->name('coches.mostrar');
 
 Route::middleware(['auth:sanctum', 'verified'])->get('/fojas', ShowFojaRutas::class)->name('fojas.show');
+
+//Route::middleware(['auth:sanctum', 'verified'])->get('/empresas', CreateEmpresa::class)->name('empresas.create');
+
+Route::middleware(['auth:sanctum', 'verified'])->get('/empresas', CreateEmpresa::class)->name('empresas.show');
