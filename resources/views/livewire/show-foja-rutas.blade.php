@@ -157,7 +157,7 @@
                             {{$foja->observacion}}
                         </td>
                         <td class="cursor-pointer px-6 py-4 whitespace-nowrap text-sm font-medium">
-                            
+                            Crear
                             {{--@livewire('edit-foja',['fojas'=>$fojas],key($fojas->id))--}}
                         </td>
                     </tr>         
