@@ -5,9 +5,8 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Persona extends Model
+class Guia extends Model
 {
     use HasFactory;
-
-    protected $fillable=['apellido', 'nombre', 'cuil', 'domicilio','telefono','estado_id'];
+    protected $fillable=['nro', 'm_cub_tot', 'fecha_sal', 'completo','observacion','estado_id'];
 }

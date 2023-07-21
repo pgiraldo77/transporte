@@ -13,13 +13,13 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('personas', function (Blueprint $table) {
+        Schema::create('guias', function (Blueprint $table) {
             $table->id();
-            $table->string('apellido');
-            $table->string('nombre');
-            $table->string('cuil');
-            $table->string('domicilio');
-            $table->string('telefono');
+            $table->integer('nro');
+            $table->float('m_cub_tot');
+            $table->date('fecha_sal');
+            $table->boolean('completo');
+            $table->String('observacion');
             $table->integer('estado_id');
             $table->timestamps();
         });
@@ -32,6 +32,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('personas');
+        Schema::dropIfExists('guias');
     }
 };

@@ -8,4 +8,6 @@ use Illuminate\Database\Eloquent\Model;
 class Factura extends Model
 {
     use HasFactory;
+
+    protected $fillable=['nro', 'fecha','emp_loc_id','observacion'];
 }
