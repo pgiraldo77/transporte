@@ -2,9 +2,9 @@
 
 namespace App\Http\Livewire;
 
+use Livewire\Component;
 use App\Models\Provincia;
 use App\Models\Localidad;
-use Livewire\Component;
 
 class SelectAnidados extends Component
 {

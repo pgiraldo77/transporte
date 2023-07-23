@@ -1,9 +1,8 @@
 <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
-   
-    <x-table>
-               
-        @if ($remitos->count())
+   @livewire('create-depbsas')
 
+    <x-table>          
+        @if ($remitos->count())
             <table class="min -w-full divide-y divide-gray-200">
                 <thead class="bg-gray-50">
                     <tr>
@@ -94,22 +93,22 @@
                     @foreach ($remitos as $remito)
                     <tr>
                         <td class="px-6 py-4">
-                            {{$remito->id}}
+                            Origen
+                        </td>
+                        <td class="px-6 py-4 text-sm text-gray-500">
+                            Destino
                         </td>
                         <td class="px-6 py-4 text-sm text-gray-500">
                             {{$remito->nro}}
                         </td>
                         <td class="px-6 py-4 text-sm text-gray-500">
-                            {{$remito->fecha_sal}}
+                            Bultos
                         </td>
                         <td class="px-6 py-4 text-sm text-gray-500">
-                            {{$remito->m_cub_tot}}
+                            {{$remito->fecha_sello}}
                         </td>
                         <td class="px-6 py-4 text-sm text-gray-500">
-                            {{$remito->completo}}
-                        </td>
-                        <td class="px-6 py-4 text-sm text-gray-500">
-                            {{$remito->observacion}}
+                            
                         </td>
                         <td class="cursor-pointer px-6 py-4 whitespace-nowrap text-sm font-medium">
                             Crear
