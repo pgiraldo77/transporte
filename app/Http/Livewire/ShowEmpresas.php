@@ -16,14 +16,13 @@ class ShowEmpresas extends Component
 
     public function render()
     {
-        /*$empresas=Empresa::where('razon_social','like', '%'. $this->search . '%')
-                        ->orwhere('cuit','like', '%'. $this->search . '%')
-                        ->orderBy($this->sort,$this->direccion)
-                        ->get();     */
-                        
-        $empresas=Empresa::where('razon_social','like', '%'. $this->search . '%')
+                                
+        $empresas=Empresa::select('empresas.*','emp_locs.*','provincias.nombre as prov','localidades.nombre as loc')
+                          ->where('razon_social','like', '%'. $this->search . '%')
                           ->orwhere('cuit','like', '%'. $this->search . '%')
                           ->join('emp_locs', 'empresas.id', '=', 'emp_locs.empresa_id')
+                          ->join('localidades', 'localidades.id', '=', 'emp_locs.localidad_id')
+                          ->join('provincias', 'localidades.id_provincia', '=', 'provincias.id')
                           ->get();                 
 
         return view('livewire.show-empresas', compact('empresas'));                

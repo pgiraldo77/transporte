@@ -70,6 +70,11 @@
                                 <i class="fas fa-sort float-right mt-1"> </i>
                             @endif
                         </th>
+                        <th scope="col"
+                            class="px-6 py-3 text-left text-xs font-medium text-gray->500 uppercase" 
+                            wire:click="order('cuit')">
+                            Provincia/Localidad 
+                        </th>
 
                         <th scope="col"
                             class="px-6 py-3 text-left text-xs font-medium text-gray->500 uppercase" 
@@ -82,7 +87,7 @@
                             wire:click="order('cuit')">
                             Teléfono 
                         </th>
-                        
+                                                
                         <th scope="col"
                             class="px-6 py-3 text-left text-xs font-medium text-gray->500 uppercase">
                             Editar
@@ -100,6 +105,9 @@
                         </td>
                         <td class="px-6 py-4 text-sm text-gray-500">
                             {{$empresa->cuit}}
+                        </td>
+                        <td class="px-6 py-4 text-sm text-gray-500">
+                            {{$empresa->prov.'/'.$empresa->loc}}
                         </td>
                         <td class="px-6 py-4 text-sm text-gray-500">
                             {{$empresa->direccion}}
