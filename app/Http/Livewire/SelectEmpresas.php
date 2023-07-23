@@ -11,14 +11,18 @@ use App\Models\Localidad;
 class SelectEmpresas extends Component
 {
     public $provincias;
+    public $origen=1;
     public $empresas;
-    public $localidad_id;
+    public $localidad_id, $provincia_id;
 
       
-    public function mount()
+    public function mount($valor)
     {
+        if($valor==0)  $this->origen=1; // Con 1 define el id_provincia Bs.As.
+        else $this->origen=14;          //Con 14 define el id_provincia Mendoza
         $this->provincias = Provincia::all();
-        $this->empresas = Empresa::all();
+
+        $this->listarEmpresas($this->origen);
     }
 
 
@@ -27,19 +31,19 @@ class SelectEmpresas extends Component
         return view('livewire.select-empresas');
     }
 
-    public function listarEmpresas($value)
+    public function listarEmpresas($mivalue)
     {
-        // Actualiza las Empresas cuando se selecciona una provincia
-       //$this->empresas = Empresa::all();
         $this->empresas=Localidad::select('emp_locs.id as emp_loc_id','empresas.razon_social as razon_social')
-                          ->where('id_provincia','=', $value)
+                          ->where('id_provincia','=', $mivalue)
                           ->join('emp_locs', 'localidades.id', '=', 'emp_locs.localidad_id')
                           ->join('empresas', 'emp_locs.empresa_id', '=', 'empresas.id')
                           ->get(); 
-
+       
+        $this->provincia_id=$mivalue;
     }
   
-    /*public function selectEmpresa($value){
+    public function selectEmpresaid($value){
+        $this->listarEmpresas($this->provincia_id);
         $this->emit('asignar_empresa_id', $value);
-    }*/
+    }
 }

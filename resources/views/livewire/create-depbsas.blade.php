@@ -24,10 +24,10 @@
                     
                     <tr>
                         <td class="px-6 py-4">                           
-                            @livewire('select-empresas')
+                            @livewire('select-empresas',['valor'=>0])
                         </td>
                         <td class="px-6 py-4 text-sm text-gray-500">
-                            @livewire('select-empresas')
+                            @livewire('select-empresas',['valor'=>1])
                         </td>
                         <td class="cursor-pointer px-6 py-4 text-sm text-gray-500">
                             @livewire('create-remitos')

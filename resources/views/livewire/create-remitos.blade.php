@@ -5,9 +5,11 @@
 
     <x-dialog-modal wire:model="open">
         <x-slot name="title">
-            Crear Remito
+            Nuevo Remito
         </x-slot>
         <x-slot name="content">
+            @livewire('select-empresas',['valor'=>0]) {{-- //con valor 0 indica que se carga la prov. de Bs. AS. --}}
+            <br>
             <div class="mb-4">
                 <x-label value="Número" />
                 <x-input type="text" class="w-full" wire:model="nro"/>
@@ -26,6 +28,44 @@
                 <x-input type="date" class="w-full" wire:model="fecha_sello"/>
 
                 <x-input-error for="fecha_sello" />
+            </div> 
+
+            <div class="mb-4">
+                <x-label value="Bultos" />
+                <x-input type="text" class="w-full" wire:model="bultos"/>
+
+                <x-input-error for="bultos" />
+            </div> 
+            <div class="mb-4">
+                <x-label value="Valor Declarado" />
+                <x-input type="text" class="w-full" wire:model="valor_dec"/>
+
+                <x-input-error for="valor_dec" />
+            </div>
+
+            <div class="mb-4">
+                <x-label value="Metros Cúbicos" />
+                <x-input type="text" class="w-full" wire:model="m_cubicos"/>
+
+                <x-input-error for="bultos" />
+            </div> 
+
+            <div class="mb-4">
+                <x-label value="Kgr" />
+                <x-input type="text" class="w-full" wire:model="kgr"/>
+
+                <x-input-error for="kgr" />
+            </div> 
+
+            <div class="mb-4">
+                <x-label value="Posición" />
+                <select id="posicion" wire:model="posicion">
+                    <option value="">Seleccione Posición</option>
+                    <option value="1">1</option>
+                    <option value="1/4">1/4</option>
+                    <option value="1/2">1/2</option>
+                    <option value="3/4">3/4</option>
+                </select>
             </div> 
 
             <div class="mb-4">
