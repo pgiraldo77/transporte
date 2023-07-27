@@ -11,11 +11,9 @@
                   @endif
             @endforeach
         </select>
-    </div>
-    </br>
-    <div>
+
         <label for="empresa">Empresa :</label>
-        <select id="empresa" wire:change="selectEmpresaid($event.target.value)">
+        <select id="{{$identificador}}" wire:change="selectEmpresaid($event.target.value)">
             <option value="">Seleccione una Empresa</option>
             @foreach ($empresas as $emp)
                 <option value="{{ $emp->emp_loc_id }}">{{ $emp->razon_social }}</option>

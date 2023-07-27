@@ -8,10 +8,26 @@
             Nuevo Remito
         </x-slot>
         <x-slot name="content">
-            @livewire('select-empresas',['valor'=>0]) {{-- //con valor 0 indica que se carga la prov. de Bs. AS. --}}
+            <div class="mb-4 text-center text-2xl text-orange-800">
+            Empresa {{$empresa}}
+            </div>
             <br>
+            <div class="mb-4 text-base text-orange-800">                          
+                ORIGEN
+                @livewire('select-empresas',['valor'=>0])
+              
+            </div>
+            <br>
+            <div class="mb-4 text-base text-orange-800">
+                DESTINO
+                @livewire('select-empresas',['valor'=>1])
+            </div>
+
             <div class="mb-4">
-                <x-label value="Número" />
+                @livewire('create-empresa')
+            </div>
+            <div class="mb-4">
+                <x-label value="Número Remito" />
                 <x-input type="text" class="w-full" wire:model="nro"/>
 
                 <x-input-error for="nro" />    
@@ -73,6 +89,10 @@
                 <x-input type="text" class="w-full" wire:model="observacion"/>
 
                 <x-input-error for="observacion" />
+
+                {{'Origen valor='.$emp_loco_id}}
+                <br>
+                {{'Destino valor='.$emp_locd_id}}
             </div> 
             
         </x-slot>

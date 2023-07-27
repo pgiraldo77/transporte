@@ -30,6 +30,7 @@ return new class extends Migration
             $table->float('posicion');
             $table->float('m_cubicos');
             $table->float('kgr');
+            $table->integer('estado_id');
             $table->timestamps();
         });
     }

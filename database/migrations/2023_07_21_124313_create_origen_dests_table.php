@@ -13,7 +13,7 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('guia_origen_dests', function (Blueprint $table) {
+        Schema::create('origen_dests', function (Blueprint $table) {
             $table->id();
             $table->string('tabla');
             $table->integer('tabla_id');
@@ -25,9 +25,9 @@ return new class extends Migration
                 ->onDelete('set null');
             $table->unsignedBigInteger('emp_locd_id')->nullable();
             $table->foreign('emp_locd_id')
-                ->references('id')
-                ->on('emp_locs')
-                ->onDelete('set null');
+                    ->references('id') 
+                    ->on('emp_locs')
+                    ->onteDele('set null');
             $table->timestamps();
         });
     }

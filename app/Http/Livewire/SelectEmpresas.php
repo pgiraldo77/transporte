@@ -11,15 +11,21 @@ use App\Models\Localidad;
 class SelectEmpresas extends Component
 {
     public $provincias;
-    public $origen=1;
+    public $origen=1,$identificador;
     public $empresas;
     public $localidad_id, $provincia_id;
+ 
 
-      
     public function mount($valor)
     {
-        if($valor==0)  $this->origen=1; // Con 1 define el id_provincia Bs.As.
-        else $this->origen=14;          //Con 14 define el id_provincia Mendoza
+        if($valor==0){ 
+             $this->origen=1;                // Con 1 define el id_provincia Bs.As.
+             $this->identificador='origen';  //Identifica el nombre del Select si es origen o destino
+
+        }else{ 
+              $this->origen=14;   //Con 14 define el id_provincia Mendoza
+              $this->identificador='destino';
+               }
         $this->provincias = Provincia::all();
 
         $this->listarEmpresas($this->origen);
@@ -44,6 +50,7 @@ class SelectEmpresas extends Component
   
     public function selectEmpresaid($value){
         $this->listarEmpresas($this->provincia_id);
-        $this->emit('asignar_empresa_id', $value);
+        $this->emit('asignar_empresa_id', $value, $this->identificador);
+        //$this->emit('identificador', $this->identificador);
     }
 }
