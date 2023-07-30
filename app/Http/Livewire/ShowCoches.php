@@ -10,16 +10,19 @@ class ShowCoches extends Component
     public $search;
     public $sort= 'id';
     public $direccion='asc';
+    public $nro, $tipo_coche_id;
 
-    protected $listeners = ['render'=>'render'];
+    protected $listeners = ['render'];
     
-
     public function render()
     {
-        $coches=Coche::where('detalle','like', '%'. $this->search . '%')
-                        ->orwhere('cap_carga','like', '%'. $this->search . '%')
+        $coches=Coche::where('coches.nro','like', '%'. $this->search . '%')
+                        ->select('coches.*','tipo_coches.tipo as tipo')
+                        ->join('tipo_coches', 'coches.tipo_coche_id', 'tipo_coches.id')
+                        ->orwhere('tipo_coches.tipo','like', '%'. $this->search . '%')
                         ->orderBy($this->sort,$this->direccion)
                         ->get();
+        //$coches=Coche::all();                
 
         return view('livewire.show-coches', compact('coches'));
     }

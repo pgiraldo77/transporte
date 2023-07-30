@@ -9,7 +9,7 @@
         </x-slot>
 
         <x-slot name="content">
-
+            {{--     
             <div wire:loading wire:target="image" class="mb-4 bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded relative" role="alert">
                 <strong class="font-bold">Imagen Cargando!</strong>
                 <span class="block sm:inline">Espere un momento mientras se procesa la imagen</span>
@@ -18,32 +18,27 @@
             @if($image)
                 <img class="mb-4" src="{{$image->temporaryUrl()}}">
             @endif
-
+            --}}
             <div class="mb-4">
-                <x-label value="Detalle del Coche" />
-                <textarea wire:model="detalle" class="form-control w-full" rows="6" ></textarea>
+                <x-label value="Patente" />
+                <x-input type="text" class="w-full" wire:model="nro"/>
 
-                <x-input-error for="detalle" />    
+                <x-input-error for="nro" />    
             </div>    
-
+            
             <div class="mb-4">
-                <x-label value="Capacidad de Carga" />
-                <x-input type="text" class="w-full" wire:model="cap_carga"/>
-
-                <x-input-error for="cap_carga" />
+                    <label for="tipo_coche_id">Tipo :</label>
+                    <select id="tipo_coche_id" wire:change="asigna_tipo_coche($event.target.value)">
+                        <option value="">Seleccione tipo Coche</option>
+                        
+                            @foreach ($tipoco as $t)
+                            <option value="{{ $t->id }}">{{ $t->tipo }}</option>
+                            @endforeach
+                        
+                    </select>
+                <x-input-error for="tipo_coche_id" />
             </div> 
-            
-            <div class="mb-4">
-                <x-label value="Modelo" />
-                <x-input wire:model="modelo" type="text" class="w-full" />           
-
-                <x-input-error for="modelo" />
-            </div>
-            
-            <div>
-                <input type="file" wire:model="image" id="{{$identificador}}">
-                <x-input-error for="image" />
-            </div>
+            {{$tipo_coche_id}}
         </x-slot>         
            
         <x-slot name="footer">

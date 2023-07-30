@@ -32,11 +32,11 @@
                         </th>
                         <th scope="col"
                             class="cursor-pointer px-6 py-3 text-left text-xs font-medium text-gray->500 uppercase" 
-                            wire:click="order('detalle')">
-                            Detalle
+                            wire:click="order('nro')">
+                            Nro
                             
                             {{--sort--}}
-                            @if ($sort == 'detalle')
+                            @if ($sort == 'nro')
                                 
                                 @if ($direccion == 'asc')
                                     <i class="fas fa-sort-alpha-up-alt float-right mt-1"> </i>
@@ -52,11 +52,11 @@
                         </th>
                         <th scope="col"
                             class="cursor-pointer px-6 py-3 text-left text-xs font-medium text-gray->500 uppercase" 
-                            wire:click="order('cap_carga')">
-                            Cap. de Carga
+                            wire:click="order('tipo_coche_id')">
+                            Tipo Coche
 
                             {{--sort--}}
-                            @if ($sort == 'cap_carga')
+                            @if ($sort == 'tipo_coche_id')
                                 
                                 @if ($direccion == 'asc')
                                     <i class="fas fa-sort-alpha-up-alt float-right mt-1"> </i>
@@ -82,10 +82,10 @@
                             {{$coche->id}}
                         </td>
                         <td class="px-6 py-4 text-sm text-gray-500">
-                            {{$coche->detalle}}
+                            {{$coche->nro}}
                         </td>
                         <td class="px-6 py-4 text-sm text-gray-500">
-                            {{$coche->cap_carga}}
+                            {{$coche->tipo}}
                         </td>
                         <td class="px-6 py-4 whitespace-nowrap text-sm font-medium">
                             @livewire('edit-coche',['coche'=>$coche],key($coche->id))
