@@ -91,8 +91,8 @@ class CreateRemitos extends Component
 
         $this->reset(['nro','fecha','fecha_sello','observacion','valor_dec','m_cubicos','kgr']);
 
-        $this->emit('render'); //Emisor de Render a la Clase ShowEmpresa
-        //$this->emit('alert', 'El Coche se creó satisfactoriamente');
+        $this->emit('render'); //Emisor de Render a la Clase Showdepbsas
+        $this->emit('alert', 'El Remito se creó satisfactoriamente');
     }
     
     public function existe($emp_loco_id,$emp_locd_id,$fecha,$tbl){

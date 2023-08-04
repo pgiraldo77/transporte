@@ -27,14 +27,10 @@
                              @livewire('create-remitos')
                         </td>    
                         <td class="cursor-pointer px-6 py-4 text-sm text-gray-500">
-                            <x-danger-button wire:click="save" wire:loading.attr="disabled" wire:target="save, image" class="disabled:opacity-25">
-                                Asignar Coche
-                            </x-danger-button> 
+                          
                         </td>
                         <td class="px-6 py-4 text-sm text-gray-500">
-                            <x-danger-button wire:click="save" wire:loading.attr="disabled" wire:target="save, image" class="disabled:opacity-25">
-                                Asignar Foja Ruta
-                            </x-danger-button>     
+                           
                         </td>
                     </tr>                           
             </table>

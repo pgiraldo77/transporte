@@ -3,24 +3,24 @@
 namespace App\Http\Livewire;
 use App\Models\Coche;
 use App\Models\TipoCoche;
-use Livewire\WithFileUploads;
+//use Livewire\WithFileUploads;
 
 
 use Livewire\Component;
 
 class CreateCoche extends Component
 {
-    use WithFileUploads;
+    //use WithFileUploads;
 
     public $open = false;
-    public $cap_carga, $nro, $tipo_coche_id, $identificador;
+    public $nro, $tipo_coche_id, $identificador;
 
     /*public function mount(){
         $this->identificador=rand();
     }*/
 
     protected $rules=[
-         'nro' => 'required|max:100',
+         'nro' => 'required|max:10',
          //'tipo' => 'required|min:4|max:5',
          //'' => 'required|max:4',
          //'image' => 'required|image|max:2048'
@@ -45,18 +45,12 @@ class CreateCoche extends Component
         
         $this->validate();
 
-        //$image=$this->image->store('coches');
-
         Coche::create([
             'nro' => $this->nro,
             'tipo_coche_id' => $this->tipo_coche_id
-            //'modelo' => $this->modelo,
-            //'image' => $image
         ]);
 
         $this->reset(['open','nro','tipo_coche_id']);
-
-       // $this->identificador =rand();
 
         $this->emit('render');
         $this->emit('alert', 'El Coche se creó satisfactoriamente');

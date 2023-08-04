@@ -1,111 +1,134 @@
-
-<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4">
     <div class="text-8xl">
         <x-label class="text-right" value="Met. Cubicos Totales" />
     </div>
-    <div class="text-right text-{{$color}}-600 text-9xl">
-        {{$suma}}
+    <div class="text-right text-{{ $color }}-600 text-9xl">
+        <h3>{{ $suma }}</h3>
     </div>
-    
+
     @livewire('create-depbsas')
 
-    <x-table>          
+    <x-table>
         @if ($remitos->count())
             <table class="min -w-full divide-y divide-gray-200">
                 <thead class="bg-gray-50">
                     <tr>
                         <th scope="col"
-                            class="w-24 cursor-pointer px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase" 
-                            wire:click="order('id')">
-                           Check
+                            class="w-24 cursor-pointer px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">
+                            <label>
+                                <input type="checkbox" wire:click="$set('checktodos', 'checked')">
+                                    Todos
+                            </label>
+
                         </th>
                         <th scope="col"
-                            class="w-24 cursor-pointer px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase" 
-                            wire:click="order('id')">
+                            class="w-24 cursor-pointer px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase"
+                            wire:click="order('origen')">
                             Origen
 
-                           
+
                         </th>
                         <th scope="col"
-                            class="w-24 cursor-pointer px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase" 
-                            wire:click="order('nro')">
+                            class="w-24 cursor-pointer px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase"
+                            wire:click="order('destino')">
                             Destino
-                            
+
                         </th>
                         <th scope="col"
-                            class="cursor-pointer px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase" 
-                            wire:click="order('fecha_sal')">
+                            class="cursor-pointer px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase"
+                            wire:click="order('nro')">
                             Remito
 
-                            
                         </th>
                         <th scope="col"
-                            class="cursor-pointer px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase" 
-                            wire:click="order('fecha_sal')">
+                            class="cursor-pointer px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase"
+                            wire:click="order('bultos')">
                             Bultos
-  
+                            {{-- sort --}}
+                            @if ($sort == 'bultos')
+
+                                @if ($direccion == 'asc')
+                                    <i class="fas fa-sort-alpha-up-alt float-right mt-1"> </i>
+                                @else
+                                    <i class="fas fa-sort-alpha-down-alt float-right mt-1"> </i>
+                                @endif
+                            @endif
                         </th>
 
                         <th scope="col"
-                            class="cursor-pointer px-6 py-3 text-left text-xs font-medium text-gray->500 uppercase" 
-                            wire:click="order('fecha_sal')">
+                            class="cursor-pointer px-6 py-3 text-left text-xs font-medium text-gray->500 uppercase"
+                            wire:click="order('valor_dec')">
                             Valor Declarado
-  
+
+                            {{-- sort --}}
+                            @if ($sort == 'valor_dec')
+
+                                @if ($direccion == 'asc')
+                                    <i class="fas fa-sort-alpha-up-alt float-right mt-1"> </i>
+                                @else
+                                    <i class="fas fa-sort-alpha-down-alt float-right mt-1"> </i>
+                                @endif
+                            @endif
                         </th>
 
                         <th scope="col"
-                            class="px-6 py-3 text-left text-xs font-medium text-gray->500 uppercase">
+                            class="cursor-pointer px-6 py-3 text-left text-xs font-medium text-gray->500 uppercase"
+                            wire:click="order('fecha_sello')">
                             Fecha Sello
                         </th>
 
-                        <th scope="col"
-                        class="px-6 py-3 text-left text-xs font-medium text-gray->500 uppercase">
-                        Editar
+                        <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray->500 uppercase">
+                            Editar
                         </th>
                     </tr>
                 </thead>
                 <tbody class=" bg-white divide+y divide-gray-200">
                     @foreach ($remitos as $remito)
-                    <tr>
-                        <td class="px-6 py-4">
-                            {{--<x-checkbox wire:model="elementos" value="{{$remito->m_cubicos}}" name="{{$remito->id}}">
+                        <tr>
+                            <td class="px-6 py-4">
+                                <label>
+                                    <input type="checkbox" wire:model="elementos" value="{{ $remito->id . '-' . $remito->m_cubicos }}">
+                                    {{ $remito->m_cubicos }}
+                                </label>
 
-                            </x-checkbox>--}}
-                            <label>
-                                <input type="checkbox" wire:model="elementos" value="{{ $remito->m_cubicos }}" >
-                                 {{$remito->m_cubicos}}
-                            </label>
-                           
-                        </td>
-                        <td class="px-6 py-4">
-                            {{$remito->origen}}
-                        </td>
-                        <td class="px-6 py-4">
-                            {{$remito->destino}}
-                        </td>
-                        <td class="px-6 py-4 text-sm text-gray-500">
-                            {{$remito->nro}}
-                            
-                        </td>
-                        <td class="px-6 py-4 text-sm text-gray-500">
-                            {{$remito->bultos}}
-                        </td>
+                            </td>
+                            <td class="px-6 py-4">
+                                {{ $remito->origen }}
+                            </td>
+                            <td class="px-6 py-4">
+                                {{ $remito->destino }}
+                            </td>
+                            <td class="px-6 py-4 text-sm text-gray-500">
+                                {{ $remito->nro }}
 
-                        <td class="px-6 py-4 text-sm text-gray-500">
-                            ${{$remito->valor_dec}}
-                        </td>
-                        <td class="px-6 py-4 text-sm text-gray-500">
-                            {{$remito->fecha_sello}}
-                        </td>
-                        <td class="cursor-pointer px-6 py-4 whitespace-nowrap text-sm font-medium">
-                            Editar
-                            {{--@livewire('edit-foja',['fojas'=>$fojas],key($fojas->id))--}}
-                        </td>
-                    </tr>         
+                            </td>
+                            <td class="px-6 py-4 text-sm text-gray-500">
+                                {{ $remito->bultos }}
+                            </td>
+
+                            <td class="px-6 py-4 text-sm text-gray-500">
+                                ${{ $remito->valor_dec }}
+                            </td>
+                            <td class="px-6 py-4 text-sm text-gray-500">
+                                {{ $remito->fecha_sello }}
+                            </td>
+                            <td class="cursor-pointer px-6 py-4 whitespace-nowrap text-sm font-medium">
+                                Editar
+                                {{-- @livewire('edit-foja',['fojas'=>$fojas],key($fojas->id)) --}}
+                            </td>
+                        </tr>
                     @endforeach
             </table>
-                    
-            @endif
+
+        @endif
 
     </x-table>
+    <div class="text-center">
+        
+        <form action="{{route('fojas.create')}}" method="GET" >
+    
+       
+            <button wire:click="$emit('valorchecks',$suma)">Cargar</button>
+        </form>
+    </div>   
 </div>

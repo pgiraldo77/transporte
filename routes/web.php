@@ -6,6 +6,7 @@ use App\Http\Livewire\ShowCoches;
 use App\Http\Livewire\ShowFojaRutas;
 use App\Http\Livewire\ShowDepbsas;
 use App\Http\Livewire\ShowEmpresas;
+use App\Http\Livewire\CreateFojaRutas;
 
 /*
 |--------------------------------------------------------------------------
@@ -44,8 +45,12 @@ Route::middleware('auth')->group(function () {
 
 Route::middleware(['auth:sanctum', 'verified'])->get('/coches', ShowCoches::class)->name('coches.show');
 
+//-------------------------------- FOJAS ------------------------------- ------------------------------------------
+Route::middleware(['auth:sanctum', 'verified'])->get('/fojascreate', CreateFojaRutas::class)->name('fojas.create');
+
 Route::middleware(['auth:sanctum', 'verified'])->get('/fojas', ShowFojaRutas::class)->name('fojas.show');
 
+//-------------------------------- EMPRESAS -----------------------------------------------------------------------
 //Route::middleware(['auth:sanctum', 'verified'])->get('/empresas', CreateEmpresa::class)->name('empresas.create');
 
 Route::middleware(['auth:sanctum', 'verified'])->get('/empresas', ShowEmpresas::class)->name('empresas.show');

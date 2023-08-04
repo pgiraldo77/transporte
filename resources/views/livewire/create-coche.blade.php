@@ -38,7 +38,7 @@
                     </select>
                 <x-input-error for="tipo_coche_id" />
             </div> 
-            {{$tipo_coche_id}}
+           
         </x-slot>         
            
         <x-slot name="footer">

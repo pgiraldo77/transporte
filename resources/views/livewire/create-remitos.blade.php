@@ -78,9 +78,9 @@
                 <select id="posicion" wire:model="posicion">
                     <option value="">Seleccione Posición</option>
                     <option value="1">1</option>
-                    <option value="1/4">1/4</option>
-                    <option value="1/2">1/2</option>
-                    <option value="3/4">3/4</option>
+                    <option value="0.25">1/4</option>
+                    <option value="0.5">1/2</option>
+                    <option value="0.75">3/4</option>
                 </select>
             </div> 
 
