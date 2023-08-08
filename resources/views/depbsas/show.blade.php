@@ -1,6 +1,6 @@
 <x-app-layout>
     
-    <div class="class="container mx-auto">
+    <div>
         @livewire('show-depbsas')
     </div>
 

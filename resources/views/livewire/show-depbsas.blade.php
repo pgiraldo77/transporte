@@ -1,11 +1,9 @@
 <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4">
-    <div class="text-8xl">
-        <x-label class="text-right" value="Met. Cubicos Totales" />
-    </div>
-    <div class="text-right text-{{ $color }}-600 text-9xl">
-        <h3>{{ $suma }}</h3>
-    </div>
-
+   
+        <div class="font-medium text-center text-blue-700 uppercase decoration-slate-50"> Alta remitos deposito Bs. As. </div>   
+   
+        <div> <x-label class="text-right text-{{ $color }}-600 text-9xl" value="Met. Cubicos Totales--> {{ $suma }}" /></div>
+ 
     @livewire('create-depbsas')
 
     <x-table>
@@ -17,7 +15,7 @@
                             class="w-24 cursor-pointer px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">
                             <label>
                                 <input type="checkbox" wire:click="$set('checktodos', 'checked')">
-                                    Todos
+                                Todos
                             </label>
 
                         </th>
@@ -78,16 +76,17 @@
                         </th>
 
                         <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray->500 uppercase">
-                            Editar
+                           
                         </th>
                     </tr>
                 </thead>
                 <tbody class=" bg-white divide+y divide-gray-200">
                     @foreach ($remitos as $remito)
                         <tr>
-                            <td class="px-6 py-4">
+                            <td class="py-4 px-4">
                                 <label>
-                                    <input type="checkbox" wire:model="elementos" value="{{ $remito->id . '-' . $remito->m_cubicos }}">
+                                    <input type="checkbox" wire:model="elementos"
+                                        value="{{ $remito->id . '-' . $remito->m_cubicos }}">
                                     {{ $remito->m_cubicos }}
                                 </label>
 
@@ -112,23 +111,28 @@
                             <td class="px-6 py-4 text-sm text-gray-500">
                                 {{ $remito->fecha_sello }}
                             </td>
-                            <td class="cursor-pointer px-6 py-4 whitespace-nowrap text-sm font-medium">
-                                Editar
-                                {{-- @livewire('edit-foja',['fojas'=>$fojas],key($fojas->id)) --}}
+                            <td class="cursor-pointer">
+                               <div class="w-6 h-7"> 
+                               <img src="assets/img/editar.jpg" alt="imagen" />
+                             </div>
                             </td>
+                            <td class="cursor-pointer">
+                                <div class="w-6 h-7"> 
+                                <img src="assets/img/delete.jpg" alt="imagen" />
+                              </div>
+                             </td>
                         </tr>
                     @endforeach
             </table>
 
         @endif
 
+        <div class="flex items-center justify-center h-screen py-4">
+            <form action="{{ route('fojas.create') }}" method="GET">
+                <button class="hover:bg-sky-700 button bottom-3 rounded-lg px-4 py-2" wire:click="$emit('valorchecks',$suma)">Cargar</button>
+            </form>
+        </div>
+
     </x-table>
-    <div class="text-center">
-        
-        <form action="{{route('fojas.create')}}" method="GET" >
-    
-       
-            <button wire:click="$emit('valorchecks',$suma)">Cargar</button>
-        </form>
-    </div>   
+
 </div>

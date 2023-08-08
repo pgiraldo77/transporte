@@ -63,7 +63,7 @@
                 <x-label value="Metros Cúbicos" />
                 <x-input type="text" class="w-full" wire:model="m_cubicos"/>
 
-                <x-input-error for="bultos" />
+                <x-input-error for="m_cubicos" />
             </div> 
 
             <div class="mb-4">
@@ -97,7 +97,7 @@
             
         </x-slot>
         <x-slot name="footer">
-            <x-secondary-button wire:click="$set('open', false)">
+            <x-secondary-button class="px-2" wire:click="$set('open', false)">
                 Cancelar
             </x-secondary-button>
 

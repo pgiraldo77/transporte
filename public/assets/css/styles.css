@@ -31,7 +31,7 @@ a:hover{
 }
 
 table{
-    text-align: center;
+    text-align: left;
     width: 100%;
     border-bottom: 1px solid #ccc;
 }
@@ -93,9 +93,9 @@ td{
 /*MENU*/
 #menu{
     clear:both;
-    background: #222;
+    background: #140157;
     color: white;
-    height: 55px;
+    height: 65px;
     border-bottom: 4px solid #01B1EA;
 }
 
@@ -114,7 +114,7 @@ td{
 
 #menu a{
     display: block;
-    color: white;
+    color: #140157;
     text-decoration: none;
     padding-left: 12px;
     padding-right: 12px;
@@ -156,7 +156,7 @@ td{
     display: block;
     color: #222;
     width: 100%;
-    text-align: center;
+    text-align: left;
     padding-top: 2px;
     padding-bottom: 2px;
     margin-bottom: 15px;
@@ -238,7 +238,7 @@ button, .button{
 
 .button-small{
     width: 120px;
-    text-align: center;
+    text-align: left;
     margin-bottom: 20px;
 }
 
@@ -288,7 +288,7 @@ button{
     margin-left: 10px;
     margin-right: 10px;
     margin-bottom: 30px;
-    text-align: center;
+    text-align: left;
 }
 
 .product a{
@@ -376,14 +376,14 @@ button{
 
 #detail-product .button{
     width: 200px;
-    text-align: center;
+    text-align: left;
 }
 
 
 /*FOOTER*/
 #footer{
     clear: both;
-    text-align: center;
+    text-align: left;
     padding-top:10px;
     padding-bottom: 10px;
     color: white;

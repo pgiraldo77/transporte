@@ -1,36 +1,32 @@
 <?php
 
 namespace App\Http\Livewire;
+
 use App\Models\Foja_ruta;
-use App\Models\Remito;
 use App\Models\Guia_remito;
 use Livewire\Component;
-use Illuminate\Support\Facades\Session;
+use Illuminate\Http\Request;
 
 class CreateFojaRutas extends Component
 {
 
-    public $open = false;
-    public $sort= 'id';
-    public $direccion='asc';
-    public $nro, $m_cubicos_tot,$fecha_sal,$completo, $remitos=[], $elementos, $observacion;
+    public $sort = 'id';
+    public $direccion = 'asc';
+    public $variable, $bultos, $inputValue, $inputbultos=[], $inputvalordec=[];
 
-    protected $listeners = ['valorchecks'];
-
-    protected $rules=[
-         'm_cub_tot' => 'required|max:5',
-         'fecha_sal' => 'required',
-         'completo' => 'required',
-         'observacion' => 'max:100'
-    ];
+    public $elementos;
+    public $remitos = [];
 
     public function valorchecks($elementos){
         $this->elementos=$elementos;
     }
 
-    
-    public function render()
-    {
+    public function mount()
+    {   
+       $this->cargar_remitos();
+    }
+
+    public function cargar_remitos(){
         $this->elementos=session('misElementos');
         $i=0;
        
@@ -55,6 +51,12 @@ class CreateFojaRutas extends Component
                 ->orderBy($this->sort,$this->direccion)
                 ->first();
             } 
+    }
+
+
+    
+    public function render()
+    {
 
         return view('livewire.create-foja-rutas');
     }
@@ -75,5 +77,14 @@ class CreateFojaRutas extends Component
        // $this->emit('render');
        // $this->emit('alert', 'El Coche se creó satisfactoriamente');
     }
-   
+
+    public function modvaldec(){
+        $this->cargar_remitos();
+        
+       /* $inputName = 'inputbultos';
+        foreach ($this->remitos as $index => $remito){
+            $inputName = 'inputbultos'.$remito->id;
+            $this->inputValue= request()->input($inputName);
+        }*/       
+    }
 }

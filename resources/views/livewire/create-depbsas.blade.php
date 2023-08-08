@@ -1,35 +1,32 @@
-<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
-    <div class="font-medium text-center text-blue-700 uppercase"> Alta remitos deposito Bs. As. </div>    
-     
-<br>
+<div>
     <x-table>          
-            <table class="min -w-full divide-y divide-gray-200">
+            <table>
                 <thead class="bg-gray-50">
                     <tr>
-                        <th scope="col" class="px-6 py-3 text-center text-xs font-medium text-gray->500 uppercase">
+                        <th >
                           
                         </th>
-                        <th scope="col" class="px-6 py-3 text-center text-xs font-medium text-gray->500 uppercase">
+                        <th >
                                                                  
                         </th>
-                        <th scope="col" class="px-6 py-3 text-center text-xs font-medium text-gray->500 uppercase">
+                        <th >
                             
                         </th>
-                        <th scope="col" class="px-6 py-3 text-center text-xs font-medium text-gray->500 uppercase">
+                        <th >
                           
                         </th>
                     </tr>
                 </thead>
-                <tbody class=" bg-white divide+y divide-gray-200">
+                <tbody>
                     
                     <tr>
                         <td class="px-6 py-4">
                              @livewire('create-remitos')
                         </td>    
-                        <td class="cursor-pointer px-6 py-4 text-sm text-gray-500">
+                        <td>
                           
                         </td>
-                        <td class="px-6 py-4 text-sm text-gray-500">
+                        <td>
                            
                         </td>
                     </tr>                           
