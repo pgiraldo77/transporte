@@ -6,16 +6,23 @@ use App\Models\Foja_ruta;
 use App\Models\Guia_remito;
 use Livewire\Component;
 use Illuminate\Http\Request;
+use App\Models\Foja_guia;
+use App\Models\Guia;
 
 class CreateFojaRutas extends Component
 {
 
     public $sort = 'id';
     public $direccion = 'asc';
-    public $variable, $bultos, $inputValue, $inputbultos=[], $inputvalordec=[];
+    public $variable, $bultos, $completo=false, $inputValue, $inputbultos=[], $inputvalordec=[], $nro_foja, $observacion;
 
     public $elementos;
     public $remitos = [];
+
+    protected $rules=[
+        'bultos' => 'required',
+        'valor_dec' => 'required'
+    ];
 
     public function valorchecks($elementos){
         $this->elementos=$elementos;
@@ -53,7 +60,7 @@ class CreateFojaRutas extends Component
             } 
     }
 
-
+  
     
     public function render()
     {
@@ -63,28 +70,48 @@ class CreateFojaRutas extends Component
 
     public function save(){
         
-        $this->validate();
+       // $this->validate();
 
-        Foja_ruta::create([
-            'm_cub_tot' => $this->m_cub_tot,
-            'fecha_sal' => $this->fecha_sal,
-            'completo' => $this->completo,
-            'observacion' => $this->observacion
+
+       if($this->completo) $valor=0;
+       else $valor=1;
+       //Crea la Nueva Foja de Ruta
+        $foja_ant=Foja_ruta::latest('created_at')->first(); //último registro de la tabla
+        $foja=Foja_ruta::create([
+            'nro' => $foja_ant->nro+1,
+            'fecha_sal' => date('Y-m-d'),
+            'm_cub_tot' => 0,
+            'completo' => $valor,
+            'observacion'=> $this->observacion
         ]);
 
-        $this->reset(['open','m_cub_tot','fecha_sal','completo','observacion']);
+        
+        $this->nro_foja=$foja->nro;
+        $this->cargar_remitos();
+        //Asigna Todas las Guias a la Nueva Foja
+        foreach ($this->remitos as $index => $remito){
+                Foja_guia::create([
+                    'guia_id' => $remito->guia_id,
+                    'foja_id' => $foja->id
+                ]);
+            Guia::where('id', $remito->guia_id)->update(['estado_id' => 1]); //Modifica el estado de la Guía a  1 indicando que está en viaje
+        } //endforeach
+
+
+
+        //$this->reset(['open','m_cub_tot','fecha_sal','completo','observacion']);
 
        // $this->emit('render');
        // $this->emit('alert', 'El Coche se creó satisfactoriamente');
     }
 
-    public function modvaldec(){
+    /*public function modvaldec(){
         $this->cargar_remitos();
         
        /* $inputName = 'inputbultos';
         foreach ($this->remitos as $index => $remito){
             $inputName = 'inputbultos'.$remito->id;
             $this->inputValue= request()->input($inputName);
-        }*/       
-    }
+        }      
+    }*/ 
 }

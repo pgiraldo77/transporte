@@ -67,7 +67,7 @@ class CreateRemitos extends Component
                 'fecha_sal' =>$this->fecha_sello,
                 'observacion' =>'',
                 'completo'=>0,
-                'estado_id'=>0
+                'estado_id'=>0 //indica que la Guía se encuentra en Bs. As.
             ]);  
 
             Guia_remito::create([

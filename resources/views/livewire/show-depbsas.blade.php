@@ -1,6 +1,6 @@
 <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4">
    
-        <div class="font-medium text-center text-blue-700 uppercase decoration-slate-50"> Alta remitos deposito Bs. As. </div>   
+        <div class="font-medium text-center uppercase decoration-blue-400"> Alta remitos deposito Bs. As. </div>   
    
         <div> <x-label class="text-right text-{{ $color }}-600 text-9xl" value="Met. Cubicos Totales--> {{ $suma }}" /></div>
  
