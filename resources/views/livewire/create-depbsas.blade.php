@@ -24,7 +24,7 @@
                              @livewire('create-remitos')
                         </td>    
                         <td>
-                          
+                             
                         </td>
                         <td>
                            

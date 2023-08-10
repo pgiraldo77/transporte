@@ -26,6 +26,7 @@ class ShowDepbsas extends Component
         $this->remitos=Remito::select('remitos.nro as nro','remitos.fecha_sello as fecha_sello','guia_remitos.*','origen_e.razon_social as origen','destino_e.razon_social as destino')
                 ->join('guia_remitos', 'guia_remitos.remito_id', 'remitos.id')
                 ->join('guias', 'guias.id', 'guia_remitos.guia_id')
+                ->where('guias.estado_id',0)
                 ->join('origen_dests','origen_dests.tabla_id','guias.id') 
                 ->join('emp_locs as emp_origen','emp_origen.id','origen_dests.emp_loco_id')
                 ->join('emp_locs as emp_destino','emp_destino.id','origen_dests.emp_locd_id')

@@ -1,8 +1,10 @@
 <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4">
-    <div class="font-medium text-center uppercase decoration-blue-400"> Nueva Foja de Ruta {{$nro_foja}}</div>
+    <div class="font-medium text-center uppercase decoration-blue-400"> Nueva Foja de Ruta Nº {{$nro_foja}}</div>
+
+    <div> <x-label class="text-right text-{{ $color }}-600 text-9xl" value="Met. Cubicos Totales--> {{ $suma_tot }}" /></div>
 
     <x-table>
-        @if (count($remitos) > 0)
+        @if (count($remitos) > 0 || $guias->count()>0)
             <table class="min -w-full divide-y divide-gray-200">
                 <thead class="bg-gray-50">
                     <tr>
@@ -63,10 +65,31 @@
 
                 </thead>
 
-                <tbody class=" bg-white divide+y divide-gray-200">
+                <tbody class=" bg-white divide+y divide-gray-200">                    
+                        @foreach ($guias as $guia)
+                        <tr>
+                            <td>{{ $guia->origen }}</td>
+                            <td>
+                                <div class="w-6 h-7">
+                                    <img src="assets/img/flecha_azul.jpg" alt="imagen" />
+                                </div>
+                            </td>
+                            <td>{{ $guia->destino }}</td>
+                            <td>{{ $guia->nro }}</td>
+                            <td>{{ $guia->bultos }}</td>
+                            <td>{{ $guia->valor_dec }}</td>
+                            <td>{{ $guia->fecha_sello }}</td>
+                            <td class="cursor-pointer">
+                                <div class="w-6 h-7">
+                                    <img src="assets/img/delete.jpg" alt="imagen" />
+                                </div>
+                            </td>
+                        </tr>
+                        @endforeach
+                        
                     @foreach ($remitos as $index => $remito)
                         <tr>
-                            <td>{{$remito->guia_id}}</td>
+                            <td>{{ $remito->guia_id}}</td>
                             <td>{{ $remito->origen }}</td>
                             <td>
                                 <div class="w-6 h-7">
