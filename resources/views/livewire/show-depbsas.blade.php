@@ -74,6 +74,11 @@
                             wire:click="order('fecha_sello')">
                             Fecha Sello
                         </th>
+                        <th scope="col"
+                            class="cursor-pointer px-6 py-3 text-left text-xs font-medium text-gray->500 uppercase"
+                            wire:click="order('observacion')">
+                            Observacion
+                        </th>
 
                         <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray->500 uppercase">
                            
@@ -110,6 +115,9 @@
                             </td>
                             <td class="px-6 py-4 text-sm text-gray-500">
                                 {{ $remito->fecha_sello }}
+                            </td>
+                            <td class="px-6 py-4 text-sm text-gray-500">
+                                {{ $remito->observacion }}
                             </td>
                             <td class="cursor-pointer">
                                <div class="w-6 h-7"> 

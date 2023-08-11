@@ -23,7 +23,7 @@ class ShowDepbsas extends Component
     public function render()
     {
         
-        $this->remitos=Remito::select('remitos.nro as nro','remitos.fecha_sello as fecha_sello','guia_remitos.*','origen_e.razon_social as origen','destino_e.razon_social as destino')
+        $this->remitos=Remito::select('remitos.nro as nro','remitos.fecha_sello as fecha_sello','guia_remitos.*','remitos.observacion as observacion','origen_e.razon_social as origen','destino_e.razon_social as destino')
                 ->join('guia_remitos', 'guia_remitos.remito_id', 'remitos.id')
                 ->join('guias', 'guias.id', 'guia_remitos.guia_id')
                 ->where('guias.estado_id',0)

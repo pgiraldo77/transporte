@@ -2,12 +2,18 @@
     <div class="font-medium text-center uppercase decoration-blue-400"> Nueva Foja de Ruta Nº {{$nro_foja}}</div>
 
     <div> <x-label class="text-right text-{{ $color }}-600 text-9xl" value="Met. Cubicos Totales--> {{ $suma_tot }}" /></div>
+    {{$this->mensaje}}       
 
     <x-table>
         @if (count($remitos) > 0 || $guias->count()>0)
             <table class="min -w-full divide-y divide-gray-200">
                 <thead class="bg-gray-50">
                     <tr>
+                        <th scope="col"
+                            class="w-24 cursor-pointer px-2 py-3 text-left text-xs font-medium text-gray-500 uppercase">
+                            <x-label value="Nro" />
+
+                        </th>
                         <th scope="col"
                             class="w-24 cursor-pointer px-2 py-3 text-left text-xs font-medium text-gray-500 uppercase"
                             wire:click="order('origen')">
@@ -53,8 +59,8 @@
                             <x-label value="Fecha Sello" />
                         </th>
 
-                        <th scope="col" class="px-2 py-3 text-left text-xs font-medium text-gray->500 uppercase">
-
+                        <th scope="col" class="px-2 py-3 text-center text-xs font-medium text-gray->500 uppercase">
+                               Volver a Depósito 
                         </th>
                     </tr>
                     <div>
@@ -65,9 +71,12 @@
 
                 </thead>
 
-                <tbody class=" bg-white divide+y divide-gray-200">                    
+                <tbody class=" bg-white divide+y divide-gray-200">    
+                  @if($guias->count()>0)                  
+                        <?php $i=1; ?>
                         @foreach ($guias as $guia)
                         <tr>
+                            <td>{{ $i++ }}</td>
                             <td>{{ $guia->origen }}</td>
                             <td>
                                 <div class="w-6 h-7">
@@ -81,19 +90,22 @@
                             <td>{{ $guia->fecha_sello }}</td>
                             <td class="cursor-pointer">
                                 <div class="w-6 h-7">
-                                    <img src="assets/img/delete.jpg" alt="imagen" />
+                                    <img src="assets/img/flecha_roja.png" alt="Delete" wire:click="quitardeFoja({{ $guia->guia_id }})" />
+
                                 </div>
                             </td>
                         </tr>
                         @endforeach
-                        
+                @endif        
+                @if (count($remitos) > 0)    
                     @foreach ($remitos as $index => $remito)
+                    @if (isset($remito->origen))
                         <tr>
-                            <td>{{ $remito->guia_id}}</td>
+                            <td></td>
                             <td>{{ $remito->origen }}</td>
                             <td>
                                 <div class="w-6 h-7">
-                                    <img src="assets/img/flecha_azul.jpg" alt="imagen" />
+                                    <img src="assets/img/flecha_roja_der.jpg" alt="imagen" />
                                 </div>
                             </td>
                             <td>{{ $remito->destino }}</td>
@@ -107,23 +119,23 @@
                             <td>{{ $remito->fecha_sello }}</td>
                             <td class="cursor-pointer">
                                 <div class="w-6 h-7">
-                                    <img src="assets/img/delete.jpg" alt="imagen" />
+                                    <img src="assets/img/flecha_roja.png" alt="Eliminar" wire:click="removeItem({{ $index }})" />
                                 </div>
                             </td>
                         </tr>
+                        @endif
                     @endforeach
+                  @endif  
                 </tbody>
             </table>
             <div>
                 <label value="completo">
                     <input type="checkbox" wire:model.defer="completo">
                     {{"Incompleto"}}
-                    <br>
-                    {{$this->completo}}
                 </label>
             </div> 
             <div>
-                <textarea wire:model.defer="observacion" rows="4" cols="50"></textarea>
+                <textarea wire:model.defer="observacion" rows="4" cols="50">{{$observacion}}</textarea>
             </div>   
 
             <div class="flex items-center justify-center h-screen py-4">
@@ -140,4 +152,5 @@
             </div>
         @endif
     </x-table>
+    
 </div>
