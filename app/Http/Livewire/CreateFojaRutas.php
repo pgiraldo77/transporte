@@ -176,5 +176,6 @@ class CreateFojaRutas extends Component
         Guia::where('id', $id)->update(['estado_id' => 0]); //Modifica el estado de la Guía con 1 indicando que está en viaje
         DB::table('foja_guias')->where('guia_id', $id)->delete(); //Elimina la Guía de la Foja de Ruta
         $this->mensaje="Entró a quitar";
+        $this->calcula_m_cub(); //Recalcula los Metros Cúbicos Totales
     }
 }

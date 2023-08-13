@@ -112,7 +112,7 @@
                         </x-slot>         
 
                         <x-slot name="content">
-                            <x-dropdown-link :href="route('depbsas.show')">
+                            <x-dropdown-link :href="route('fojas.listar')">
                                 {{ __('Fojas de Ruta') }}
                             </x-dropdown-link>
                         

@@ -9,5 +9,5 @@ class Foja_ruta extends Model
 {
     use HasFactory;
 
-    protected $fillable=['nro', 'm_cub_tot', 'fecha_sal', 'completo','observacion'];
+    protected $fillable=['nro', 'm_cub_tot', 'fecha_sal', 'completo','observacion','estado_id'];
 }
