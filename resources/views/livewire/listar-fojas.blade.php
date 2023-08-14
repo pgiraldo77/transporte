@@ -140,7 +140,7 @@
                 <tbody class=" bg-white divide+y divide-gray-200">
                     @foreach ($fojas as $foja)
                     <?php if($foja->estado_id == 0) $estado="Activa";
-                          else $estado="Completa";    ?>
+                          else $estado="Finalizada";    ?>
                     <tr>
                         <td class="px-6 py-4">
                             {{$foja->id}}

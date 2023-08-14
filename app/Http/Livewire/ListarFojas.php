@@ -21,7 +21,7 @@ class ListarFojas extends Component
 
     public function render()
     {
-        $this->fojas=Foja_ruta::all();
+        $this->fojas=Foja_ruta::orderBy('created_at', $this->direccion)->get();
         return view('livewire.listar-fojas');
     }
 }

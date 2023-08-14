@@ -22,6 +22,8 @@ class CreateFojaRutas extends Component
     public $elementos, $guias, $color,$mensaje;
     public $remitos = [], $dataLoaded=false;
 
+    protected $listeners=['finalizafoja'];
+
     protected $rules=[
         'bultos' => 'required',
         'valor_dec' => 'required'
@@ -104,8 +106,9 @@ class CreateFojaRutas extends Component
         $this->emit('showAlert');
     }
 
-    public function finaliza_foja(){
-        //Foja_ruta::where('id', $this->foja_act->id)->update(['estado_id' => 1]);
+    public function finalizafoja(){
+        Foja_ruta::where('id', $this->foja_act->id)->update(['estado_id' => 1]);
+        $this->nro_foja="";
     }
 
     public function calcula_m_cub(){

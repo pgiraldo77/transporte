@@ -1,10 +1,14 @@
 <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4">
+    <x-table>
     <div class="font-medium text-center uppercase decoration-blue-400"> Nueva Foja de Ruta Nº {{ $nro_foja }}</div>
-
-    <div> <x-label class="text-right text-{{ $color }}-600 text-9xl"
-            value="Met. Cubicos Totales--> {{ $suma_tot }}" /></div>
-    {{ $this->mensaje }}
-
+    <div class="">
+        <form action="{{ route('depbsas.show') }}" method="GET">
+            <button class="hover:bg-sky-700 rounded-lg px-4 py-2">Volver</button>
+        </form>
+        <x-label class="text-right text-{{ $color }}-600 text-9xl"
+            value="Met. Cubicos Totales--> {{ $suma_tot }}" />
+    </div>
+    </x-table>
     <x-table>
         @if (count($remitos) > 0 || $guias->count() > 0)
             <table class="min -w-full divide-y divide-gray-200">
@@ -159,7 +163,7 @@
                     <td></td>
                     <td></td>
                     <td>
-                        <x-danger-button wire:click="showAlert" class="disabled:opacity-25">
+                        <x-danger-button wire:click="showAlert()" class="disabled:opacity-25">
                             Finalizar
                         </x-danger-button>
                     </td>
@@ -167,26 +171,27 @@
             </table>
         @endif
     </x-table>
-
-    @push('js')
-         <script>
-            Livewire.on('showAlert', () => {
-                        Swal.fire({
-                            title: 'Do you want to save the changes?',
-                            showDenyButton: true,
-                            showCancelButton: true,
-                            confirmButtonText: 'Save',
-                            denyButtonText: `Don't save`,
-                        }).then((result) => {
-                            /* Read more about isConfirmed, isDenied below */
-                            if (result.isConfirmed) {
-                                Swal.fire('Saved!', '', 'success')
-                            } else if (result.isDenied) {
-                                Swal.fire('Changes are not saved', '', 'info')
-                            }
-                        });
-                    });  
-        </script>
-    @endpush
-
 </div>
+@push('js')
+    <script>
+        Livewire.on('showAlert', () => {
+            Swal.fire({
+                title: 'Seguro desea Finalizar la Foja?',
+                text: "No podrá seguir agregando Remitos",
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                confirmButtonText: 'Si, Finalizar!'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    Livewire.emit('finalizafoja'); // Emitir evento Livewire para la acción de finalización
+                    Swal.fire(
+                        'Finalizar!',
+                        'La Foja ha sido finalizada.',
+                    )
+                }
+            })
+        });
+    </script>
+@endpush
