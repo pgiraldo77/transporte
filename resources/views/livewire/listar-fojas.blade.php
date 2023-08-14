@@ -108,6 +108,10 @@
                             @endif
                         </th>
                         <th scope="col"
+                            class="px-6 py-3 text-left text-xs font-medium text-gray->500 uppercase">
+                            Estado
+                        </th>
+                        <th scope="col"
                             class="cursor-pointer px-6 py-3 text-left text-xs font-medium text-gray->500 uppercase" 
                             wire:click="order('observacion')">
                             Observación
@@ -135,6 +139,8 @@
                 </thead>
                 <tbody class=" bg-white divide+y divide-gray-200">
                     @foreach ($fojas as $foja)
+                    <?php if($foja->estado_id == 0) $estado="Activa";
+                          else $estado="Completa";    ?>
                     <tr>
                         <td class="px-6 py-4">
                             {{$foja->id}}
@@ -150,6 +156,9 @@
                         </td>
                         <td class="px-6 py-4 text-sm text-gray-500">
                             {{$foja->completo}}
+                        </td>
+                        <td class="px-6 py-4 text-sm text-gray-500">
+                            {{$estado}}
                         </td>
                         <td class="px-6 py-4 text-sm text-gray-500">
                             {{$foja->observacion}}

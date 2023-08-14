@@ -10,17 +10,22 @@ class DetalleFoja extends Component
     public $search;
     public $sort= 'id';
     public $direccion='asc';
-    public $remitos, $nro_foja, $suma_tot, $color,$observacion ;
+    public $remitos, $nro_foja, $suma_tot, $color,$foja_id,$observacion ;
 
 
     public function mount($id)
     {
+        $this->Datos_foja($id);
+    }   
+
+     public function Datos_foja($id){
         $foja=Foja_ruta::where('id',$id)->first();
         $this->nro_foja=$foja->nro;
+        $this->foja_id=$id;
         $this->suma_tot=$foja->m_cub_tot;
         $this->observacion=$foja->observacion; 
         $this->cargar_remitos($foja->id);
-    }   
+     }
 
 
     public function cargar_remitos($id){

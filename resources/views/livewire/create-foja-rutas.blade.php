@@ -159,7 +159,7 @@
                     <td></td>
                     <td></td>
                     <td>
-                        <x-danger-button wire:click="finaliza_foja" class="disabled:opacity-25">
+                        <x-danger-button wire:click="showAlert" class="disabled:opacity-25">
                             Finalizar
                         </x-danger-button>
                     </td>
@@ -167,5 +167,26 @@
             </table>
         @endif
     </x-table>
+
+    @push('js')
+         <script>
+            Livewire.on('showAlert', () => {
+                        Swal.fire({
+                            title: 'Do you want to save the changes?',
+                            showDenyButton: true,
+                            showCancelButton: true,
+                            confirmButtonText: 'Save',
+                            denyButtonText: `Don't save`,
+                        }).then((result) => {
+                            /* Read more about isConfirmed, isDenied below */
+                            if (result.isConfirmed) {
+                                Swal.fire('Saved!', '', 'success')
+                            } else if (result.isDenied) {
+                                Swal.fire('Changes are not saved', '', 'info')
+                            }
+                        });
+                    });  
+        </script>
+    @endpush
 
 </div>

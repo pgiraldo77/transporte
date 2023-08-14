@@ -17,7 +17,7 @@ class CreateFojaRutas extends Component
     public $sort = 'id';
     public $direccion = 'asc';
     public $variable, $bultos, $completo=true, $inputValue, $inputbultos=[], $inputvalordec=[];
-    public $nro_foja, $id_foja, $suma_tot=0, $observacion;
+    public $nro_foja, $id_foja, $suma_tot=0, $observacion, $foja_act;
 
     public $elementos, $guias, $color,$mensaje;
     public $remitos = [], $dataLoaded=false;
@@ -73,7 +73,10 @@ class CreateFojaRutas extends Component
 
     public function cargar_guias(){
         $foja=Foja_ruta::latest('created_at')->first(); //último registro de la tabla
-        if($foja->estado_id==0) $this->nro_foja=$foja->nro;
+        if($foja->estado_id==0){
+                     $this->nro_foja=$foja->nro;
+                     $this->foja_act=$foja;
+                            } 
 
             $this->guias=Foja_ruta::select('remitos.nro as nro','remitos.fecha_sello as fecha_sello','guia_remitos.*','foja_rutas.observacion as observacion','origen_e.razon_social as origen','destino_e.razon_social as destino')
                 ->where('foja_rutas.estado_id','=', 0)
@@ -95,6 +98,14 @@ class CreateFojaRutas extends Component
     {     
         $this->cargar_guias();
         return view('livewire.create-foja-rutas');
+    }
+
+    public function showAlert(){
+        $this->emit('showAlert');
+    }
+
+    public function finaliza_foja(){
+        //Foja_ruta::where('id', $this->foja_act->id)->update(['estado_id' => 1]);
     }
 
     public function calcula_m_cub(){

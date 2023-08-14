@@ -1,8 +1,9 @@
 <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4">
     <div class="font-medium text-center uppercase decoration-blue-400"> Detalle Foja de Ruta Nº {{ $nro_foja }}</div>
 
-    <div> <x-label class="text-right text-{{ $color }}-600 text-9xl" value="Met. Cubicos Totales--> {{ $suma_tot }}" /></div>
-    
+    <div> <x-label class="text-right text-{{ $color }}-600 text-9xl"
+            value="Met. Cubicos Totales--> {{ $suma_tot }}" /></div>
+
     <x-table>
         @if ($remitos->count() > 0)
             <table class="min -w-full divide-y divide-gray-200">
@@ -68,7 +69,7 @@
                                 <td>{{ $remito->origen }}</td>
                                 <td>
                                     <div class="w-6 h-7">
-                                        <img src="assets/img/flecha_azul.jpg" alt="img_azul" />
+                                        <img src="../assets/img/flecha_azul.jpg" alt="imagen" />
                                     </div>
                                 </td>
                                 <td>{{ $remito->destino }}</td>
@@ -100,15 +101,11 @@
                         </div>
                     </td>
                     <td>
-                        <div>
-                            <button class="button bottom-3 rounded-lg px-4 py-2" wire:click="siguiente"
-                                class="disabled:opacity-25">
-                                Siguiente
-                            </button>
-                        </div>
+
                     </td>
                 </tr>
             </table>
+            {{ $foja_id }}
         @endif
     </x-table>
 
