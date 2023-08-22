@@ -9,6 +9,7 @@ use App\Http\Livewire\ShowEmpresas;
 use App\Http\Livewire\CreateFojaRutas;
 use App\Http\Livewire\DetalleFoja;
 use App\Http\Livewire\ListarFojas;
+use App\Http\Livewire\ShowCapCarga;
 
 /*
 |--------------------------------------------------------------------------
@@ -41,11 +42,13 @@ Route::middleware('auth')->group(function () {
 
 //require __DIR__.'/auth.php';
 
+//-------------------------------- COCHES ------------------------------- ------------------------------------------
 //Route::resource('coches',CocheController::class)->parameters(['coches'=>'coche'])->names('coches');
 
 //Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', ShowCoches::class)->name('dashboard');
 
 Route::middleware(['auth:sanctum', 'verified'])->get('/coches', ShowCoches::class)->name('coches.show');
+Route::middleware(['auth:sanctum', 'verified'])->get('/cap_carga', ShowCapCarga::class)->name('coches.show_cap_carga');
 
 //-------------------------------- FOJAS ------------------------------- ------------------------------------------
 Route::middleware(['auth:sanctum', 'verified'])->get('/fojascreate', CreateFojaRutas::class)->name('fojas.create');
@@ -59,5 +62,4 @@ Route::middleware(['auth:sanctum', 'verified'])->get('/detalle/{id}', DetalleFoj
 //Route::middleware(['auth:sanctum', 'verified'])->get('/empresas', CreateEmpresa::class)->name('empresas.create');
 
 Route::middleware(['auth:sanctum', 'verified'])->get('/empresas', ShowEmpresas::class)->name('empresas.show');
-
 Route::middleware(['auth:sanctum', 'verified'])->get('/depbsas', ShowDepbsas::class)->name('depbsas.show');

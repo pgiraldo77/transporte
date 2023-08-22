@@ -10,7 +10,7 @@ class DetalleFoja extends Component
     public $search;
     public $sort= 'id';
     public $direccion='asc';
-    public $remitos, $nro_foja, $suma_tot, $color,$foja_id,$observacion ;
+    public $remitos, $nro_foja, $suma_tot, $color,$foja_id,$observacion,$completo;
 
 
     public function mount($id)
@@ -25,6 +25,8 @@ class DetalleFoja extends Component
         $this->suma_tot=$foja->m_cub_tot;
         $this->observacion=$foja->observacion; 
         $this->cargar_remitos($foja->id);
+        if($foja->completo == 0){ $this->completo="COMPLETA"; $this->color="gray"; }
+        else{ $this->completo="INCOMPLETA"; $this->color="red";}
      }
 
 

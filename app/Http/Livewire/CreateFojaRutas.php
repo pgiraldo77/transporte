@@ -16,11 +16,12 @@ class CreateFojaRutas extends Component
 
     public $sort = 'id';
     public $direccion = 'asc';
-    public $variable, $bultos, $completo=true, $inputValue, $inputbultos=[], $inputvalordec=[];
-    public $nro_foja, $id_foja, $suma_tot=0, $observacion, $foja_act;
+    public $variable, $bultos, $inputValue, $inputbultos=[], $inputvalordec=[];
+    public $nro_foja, $id_foja, $suma_tot=0,$posi_tot=0, $observacion, $foja_act;
 
     public $elementos, $guias, $color,$mensaje;
     public $remitos = [], $dataLoaded=false;
+    public $completo=0;
 
     protected $listeners=['finalizafoja'];
 
@@ -107,7 +108,8 @@ class CreateFojaRutas extends Component
     }
 
     public function finalizafoja(){
-        Foja_ruta::where('id', $this->foja_act->id)->update(['estado_id' => 1]);
+        $this->calcula_m_cub();
+        Foja_ruta::where('id', $this->foja_act->id)->update(['m_cub_tot' =>$this->suma_tot,'estado_id' => 1]);
         $this->nro_foja="";
     }
 
@@ -118,6 +120,11 @@ class CreateFojaRutas extends Component
                                     ->join('guia_remitos', 'foja_guias.guia_id', 'guia_remitos.guia_id')
                                     ->sum('guia_remitos.m_cubicos');
         
+        $this->posi_tot=Foja_ruta::where('foja_rutas.estado_id', 0)
+                                    ->join('foja_guias', 'foja_guias.foja_id', 'foja_rutas.id')
+                                    ->join('guia_remitos', 'foja_guias.guia_id', 'guia_remitos.guia_id')
+                                    ->sum('guia_remitos.posicion');                            
+        
         
         if($this->suma_tot >= 4000) $this->color="red"; 
         elseif($this->suma_tot > 3000 && $this->suma_tot < 4000)  $this->color="orange";
@@ -125,7 +132,8 @@ class CreateFojaRutas extends Component
         
         if($this->suma_tot>0){
         $foja_actual=Foja_ruta::where('foja_rutas.estado_id', 0)->first();
-        $this->observacion=$foja_actual->observacion;                    
+        $this->observacion=$foja_actual->observacion;  
+        $this->completo=$foja_actual->completo;             
         }
     }
 
@@ -136,12 +144,7 @@ class CreateFojaRutas extends Component
 
     public function save(){
         
-       // $this->validate();
-
-
-       if($this->completo) $valor=0;
-       else $valor=1;
-       
+       // $this->validate();    
        
        $foja=$this->consul_foja_activa();
        //Crea la Nueva Foja de Ruta
@@ -150,16 +153,17 @@ class CreateFojaRutas extends Component
                 'nro' => $foja->nro+1,
                 'fecha_sal' => date('Y-m-d'),
                 'm_cub_tot' => 0,
-                'completo' => $valor,
+                'completo' => $this->completo,
                 'observacion'=> $this->observacion,
                 'estado_id' => 0
             ]);     
         $foja=$foja_actual;    
         }else{
-            Foja_ruta::where('id', $foja->id)->update(['observacion' => $this->observacion, 'completo' => $valor]); 
+            Foja_ruta::where('id', $foja->id)->update(['observacion' => $this->observacion, 'completo' => $this->completo]); 
         }    
         
         $this->nro_foja=$foja->nro;
+        $this->completo=$foja->completo;
         
         $this->cargar_remitos();
 
@@ -179,6 +183,7 @@ class CreateFojaRutas extends Component
         $this->cargar_guias();
     }
 
+    //Elimina Remito del arreglo
     public function removeItem($index){
         unset($this->elementos[$index]);
         $this->elementos = array_values($this->elementos); // Reindexar el arreglo
@@ -186,6 +191,7 @@ class CreateFojaRutas extends Component
         $this->cargar_guias();
     }
 
+    //Elimina Remito de la Base de Datos
     public function quitardeFoja($id){
         Guia::where('id', $id)->update(['estado_id' => 0]); //Modifica el estado de la Guía con 1 indicando que está en viaje
         DB::table('foja_guias')->where('guia_id', $id)->delete(); //Elimina la Guía de la Foja de Ruta

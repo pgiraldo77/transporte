@@ -8,9 +8,20 @@ use Illuminate\Support\Facades\Session;
 
 class ShowDepbsas extends Component
 {
-    public $search, $suma=0, $elementos=[], $checktodos="", $remitos, $color="green";
+    public $search, $suma=0, $suma_posi=0, $elementos=[], $checktodos=0, $remitos, $color="green";
     public $sort= 'id';
     public $direccion='asc';
+     public $selectAll = false;
+    public $checkboxes = [];
+
+    public function toggleSelectAll(){
+        
+    if ($this->checktodos) {
+        $this->elementos = collect($this->remitos)->pluck('id');
+    } else {
+        $this->elementos = [];
+    }
+}
 
     protected $listeners = ['render'];
 
@@ -46,10 +57,12 @@ class ShowDepbsas extends Component
     public function calculateSuma()
     {   
         $this->suma=0;
+        $this->suma_posi=0;
         foreach($this->elementos as $id=>$valor){
             if (isset($id)){
                 $arre=explode("-",$valor);
                 $this->suma += $arre[1];
+                $this->suma_posi += $arre[2];
             }      
         } 
         if($this->suma >= 4000) $this->color="red"; 

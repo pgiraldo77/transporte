@@ -69,7 +69,7 @@
                     </div>
                 @endif
 
-                <!-- Settings Dropdown DEPOSITOS -->
+ <!------------------------------ Settings Dropdown DEPOSITOS ----------------------------->
                 <div class="ml-3 relative">
                     <x-dropdown align="right" width="48">
                         <x-slot name="trigger">
@@ -96,7 +96,7 @@
                     </x-dropdown>
                 </div> 
 
-                 <!-- Settings Dropdown ARCHIVO -->
+<!------------------------------------- Settings Dropdown ARCHIVO --------------------------------->
                  <div class="ml-3 relative">
                     <x-dropdown align="right" width="48">
                         <x-slot name="trigger">
@@ -131,7 +131,7 @@
                     </x-dropdown>
                 </div> 
 
-                <!-- Settings Dropdown COCHES -->
+<!---------------------------- Settings Dropdown COCHES ------------------------------>
                 <div class="ml-3 relative">
                     <x-dropdown align="right" width="48">
                         <x-slot name="trigger">
@@ -149,6 +149,9 @@
                         <x-slot name="content">
                             <x-dropdown-link :href="route('coches.show')">
                                 {{ __('Listar') }}
+                            </x-dropdown-link>
+                            <x-dropdown-link :href="route('coches.show_cap_carga')">
+                                {{ __('Cap Carga') }}
                             </x-dropdown-link>
                         </x-slot>
                     </x-dropdown>
@@ -200,18 +203,11 @@
                         </x-slot>         
 
                         <x-slot name="content">
-                            <x-dropdown-link :href="route('fojas.show')">
-                                {{ __('Fojas') }}
-                            </x-dropdown-link>
-
                             <!-- Account Management -->
-                            <div class="block px-4 py-2 text-xs text-gray-400">
-                                {{ __('Manage Account') }}
-                            </div>
-
+                        
   
                             <x-dropdown-link href="{{ route('profile.show') }}">
-                                {{ __('Profile') }}
+                                {{ __('Perfil') }}
                             </x-dropdown-link>
 
                             @if (Laravel\Jetstream\Jetstream::hasApiFeatures())
@@ -228,7 +224,7 @@
 
                                 <x-dropdown-link href="{{ route('logout') }}"
                                          @click.prevent="$root.submit();">
-                                    {{ __('Log Out') }}
+                                    {{ __('Salir') }}
                                 </x-dropdown-link>
                             </form>
                         </x-slot>

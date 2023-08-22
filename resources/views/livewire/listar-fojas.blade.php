@@ -112,6 +112,11 @@
                             Estado
                         </th>
                         <th scope="col"
+                        class="cursor-pointer px-6 py-3 text-left text-xs font-medium text-gray->500 uppercase">
+                        Valor
+
+                        </th>
+                        <th scope="col"
                             class="cursor-pointer px-6 py-3 text-left text-xs font-medium text-gray->500 uppercase" 
                             wire:click="order('observacion')">
                             Observación
@@ -140,27 +145,33 @@
                 <tbody class=" bg-white divide+y divide-gray-200">
                     @foreach ($fojas as $foja)
                     <?php if($foja->estado_id == 0) $estado="Activa";
-                          else $estado="Finalizada";    ?>
+                          else $estado="Finalizada";  
+                          if($foja->completo == 0){ $completo="Completo"; $color="gray"; }
+                          else{ $completo="INCOMPLETO"; $color="red";}                           
+                          ?>
                     <tr>
                         <td class="px-6 py-4">
                             {{$foja->id}}
                         </td>
-                        <td class="px-6 py-4 text-sm text-gray-500">
+                        <td class="px-6 py-4 text-sm text-{{$color}}-600">
                             {{$foja->nro}}
                         </td>
-                        <td class="px-6 py-4 text-sm text-gray-500">
+                        <td class="px-6 py-4 text-sm text-{{$color}}-600">
                             {{$foja->fecha_sal}}
                         </td>
-                        <td class="px-6 py-4 text-sm text-gray-500">
+                        <td class="px-6 py-4 text-sm text-{{$color}}-600">
                             {{$foja->m_cub_tot}}
                         </td>
-                        <td class="px-6 py-4 text-sm text-gray-500">
-                            {{$foja->completo}}
+                        <td class="px-6 py-4 text-sm text-{{$color}}-600">
+                            {{$completo}}
                         </td>
-                        <td class="px-6 py-4 text-sm text-gray-500">
+                        <td class="px-6 py-4 text-sm text-{{$color}}-600">
                             {{$estado}}
                         </td>
-                        <td class="px-6 py-4 text-sm text-gray-500">
+                        <td class="px-6 py-4 text-sm text-{{$color}}-600">
+                            ${{round(($foja->m_cub_tot/$posicion)*$posi_precio,2)}}
+                        </td>
+                        <td class="px-6 py-4 text-sm text-{{$color}}-600">
                             {{$foja->observacion}}
                         </td>
                         <td class="cursor-pointer px-6 py-4 whitespace-nowrap text-sm font-medium">

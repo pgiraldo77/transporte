@@ -3,10 +3,12 @@
     <div class="font-medium text-center uppercase decoration-blue-400"> Nueva Foja de Ruta Nº {{ $nro_foja }}</div>
     <div class="">
         <form action="{{ route('depbsas.show') }}" method="GET">
-            <button class="hover:bg-sky-700 rounded-lg px-4 py-2">Volver</button>
+            <button class="hover:bg-sky-700 bg-slate-300 rounded-lg px-2 py-2">Volver</button>
         </form>
         <x-label class="text-right text-{{ $color }}-600 text-9xl"
             value="Met. Cubicos Totales--> {{ $suma_tot }}" />
+        <x-label class="text-right text-{{ $color }}-600 text-9xl"
+            value="Posiciones Totales--> {{ $posi_tot }}" />    
     </div>
     </x-table>
     <x-table>
@@ -35,22 +37,38 @@
                             <x-label value="Destino" />
 
                         </th>
-                        <th scope="col" class="cursor-pointer px-6 py-3 text-left text-xs text--500 uppercase"
+                        <th scope="col" class="cursor-pointer px-6 py-3 text-center text-xs text--500 uppercase"
                             wire:click="order('nro')">
                             <x-label value="Remito" />
 
                         </th>
                         <th scope="col"
-                            class="cursor-pointer px-2 py-3 text-left text-xs font-medium text-gray-500 uppercase"
+                            class="cursor-pointer px-2 py-3 text-center text-xs font-medium text-gray-500 uppercase"
                             wire:click="order('bultos')">
                             <x-label value="Bultos" />
 
                             <x-input-error for="bultos" />
 
                         </th>
+                        <th scope="col"
+                            class="cursor-pointer px-2 py-3 text-center text-xs font-medium text-gray-500 uppercase"
+                            wire:click="order('posicion')">
+                            <x-label value="Posición" />
+
+                            <x-input-error for="posicion" />
+
+                        </th>
+                        <th scope="col"
+                            class="cursor-pointer px-2 py-3 text-center text-xs font-medium text-gray-500 uppercase"
+                            wire:click="order('m_cubicos')">
+                            <x-label value="M. Cubicos" />
+
+                            <x-input-error for="m_cubicos" />
+
+                        </th>
 
                         <th scope="col"
-                            class="cursor-pointer px-2 py-3 text-left text-xs font-medium text-gray->500 uppercase">
+                            class="cursor-pointer px-2 py-3 text-center text-xs font-medium text-gray->500 uppercase">
                             <x-label value="Valor Dec" />
 
                             <x-input-error for="valor_dec" />
@@ -58,12 +76,12 @@
                         </th>
 
                         <th scope="col"
-                            class="cursor-pointer px-2 py-3 text-left text-xs font-medium text-gray->500 uppercase"
+                            class="cursor-pointer px-2 py-3 text-center text-xs font-medium text-gray->500 uppercase"
                             wire:click="order('fecha_sello')">
                             <x-label value="Fecha Sello" />
                         </th>
 
-                        <th scope="col" class="px-2 py-3 text-center text-xs font-medium text-gray->500 uppercase">
+                        <th scope="col" class="px-2 py-3 text-left text-xs font-medium text-gray->500 uppercase">
                             Volver a Depósito
                         </th>
                     </tr>
@@ -88,10 +106,12 @@
                                     </div>
                                 </td>
                                 <td>{{ $guia->destino }}</td>
-                                <td>{{ $guia->nro }}</td>
-                                <td>{{ $guia->bultos }}</td>
-                                <td>{{ $guia->valor_dec }}</td>
-                                <td>{{ $guia->fecha_sello }}</td>
+                                <td class="text-center">{{ $guia->nro }}</td>
+                                <td class="text-center">{{ $guia->bultos }}</td>
+                                <td class="text-center">{{ $guia->posicion }}</td>
+                                <td class="text-center">{{ $guia->m_cubicos }}</td>
+                                <td class="text-center">{{ $guia->valor_dec }}</td>
+                                <td class="text-center">{{ $guia->fecha_sello }}</td>
                                 <td class="cursor-pointer">
                                     <div class="w-6 h-7">
                                         <img src="assets/img/flecha_roja.png" alt="Delete"
@@ -114,14 +134,16 @@
                                         </div>
                                     </td>
                                     <td>{{ $remito->destino }}</td>
-                                    <td>{{ $remito->nro }}</td>
-                                    <td>
+                                    <td class="text-center">{{ $remito->nro }}</td>
+                                    <td class="text-center">
                                         <input type="text" value="{{ $remito->bultos }}" name="bultos">
                                     </td>
-                                    <td>
+                                    <td class="text-center">{{ $remito->posicion }}</td>
+                                    <td class="text-center">{{ $remito->m_cubicos }}</td>
+                                    <td class="text-center">
                                         <input type="text" value="{{ $remito->valor_dec }}" name="valor_dec">
                                     </td>
-                                    <td>{{ $remito->fecha_sello }}</td>
+                                    <td class="text-center">{{ $remito->fecha_sello }}</td>
                                     <td class="cursor-pointer">
                                         <div class="w-6 h-7">
                                             <img src="assets/img/flecha_roja.png" alt="Eliminar"
@@ -136,7 +158,7 @@
             </table>
             <div>
                 <label value="completo">
-                    <input type="checkbox" wire:model.defer="completo">
+                    <input type="checkbox" wire:model.defer="completo" <?php if ($completo == 1) echo "checked"; ?> >
                     {{ 'Incompleto' }}
                 </label>
             </div>
@@ -148,13 +170,13 @@
                     <td>
                         <div class="">
                             <form action="{{ route('depbsas.show') }}" method="GET">
-                                <button class="hover:bg-sky-700 rounded-lg px-4 py-2">Volver</button>
+                                <button class="bg-slate-300 rounded-lg px-2 py-2">Volver</button>
                             </form>
                         </div>
                     </td>
                     <td>
                         <div>
-                            <button class="button bottom-3 rounded-lg px-4 py-2" wire:click="save"
+                            <button class="button bottom-3 rounded-lg" wire:click="save"
                                 class="disabled:opacity-25">
                                 Cargar
                             </button>

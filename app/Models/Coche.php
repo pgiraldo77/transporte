@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use App\Models\Capcarga;
 
 class Coche extends Model
 {
@@ -11,5 +12,8 @@ class Coche extends Model
 
     protected $fillable=['nro', 'tipo_coche_id'];
 
-   // protected $guarded=['status'];
+    //Relación Muchos a Muchos
+    public function capcargas(){
+        return $this->belongsToMany(Capcarga::class,'coche_capcargas');
+    }
 }

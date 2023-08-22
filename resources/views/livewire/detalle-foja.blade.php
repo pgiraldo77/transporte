@@ -1,10 +1,13 @@
 <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4">
-    <div class="font-medium text-center uppercase decoration-blue-400"> Detalle Foja de Ruta Nº {{ $nro_foja }}</div>
-
-    <div> <x-label class="text-right text-{{ $color }}-600 text-9xl"
-            value="Met. Cubicos Totales--> {{ $suma_tot }}" /></div>
 
     <x-table>
+        <div class="font-medium text-center uppercase decoration-blue-400"> Detalle Foja de Ruta Nº {{ $nro_foja }}
+        </div>
+        <div>
+            <label class="text-{{$color}}-600" value="completo">{{ $completo }}</label>
+        </div>
+        <div> <x-label class="text-right text-{{ $color }}-600 text-9xl"
+                value="Met. Cubicos Totales--> {{ $suma_tot }}" /></div>
         @if ($remitos->count() > 0)
             <table class="min -w-full divide-y divide-gray-200">
                 <thead class="bg-gray-50">
@@ -45,6 +48,15 @@
                         </th>
 
                         <th scope="col"
+                            class="cursor-pointer px-2 py-3 text-left text-xs font-medium text-gray-500 uppercase"
+                            wire:click="order('m_cub_tot')">
+                            <x-label value="M. Cub. Tot." />
+
+                            <x-input-error for="m_cub_tot" />
+
+                        </th>
+
+                        <th scope="col"
                             class="cursor-pointer px-2 py-3 text-left text-xs font-medium text-gray->500 uppercase">
                             <x-label value="Valor Dec" />
 
@@ -72,24 +84,19 @@
                                         <img src="../assets/img/flecha_azul.jpg" alt="imagen" />
                                     </div>
                                 </td>
-                                <td>{{ $remito->destino }}</td>
-                                <td>{{ $remito->nro }}</td>
-                                <td>{{ $remito->bultos }}</td>
-                                <td>{{ $remito->valor_dec }}</td>
-                                <td>{{ $remito->fecha_sello }}</td>
+                                <td class="text-center">{{ $remito->destino }}</td>
+                                <td class="text-center">{{ $remito->nro }}</td>
+                                <td class="text-center">{{ $remito->bultos }}</td>
+                                <td class="text-center">{{ $remito->m_cubicos }}</td>
+                                <td class="text-center">{{ $remito->valor_dec }}</td>
+                                <td class="text-center">{{ $remito->fecha_sello }}</td>
                             </tr>
                         @endforeach
                     @endif
                 </tbody>
             </table>
             <div>
-                <label value="completo">
-                    <input type="checkbox" wire:model.defer="completo">
-                    {{ 'Incompleto' }}
-                </label>
-            </div>
-            <div>
-                <textarea wire:model.defer="observacion" rows="4" cols="50">{{ $observacion }}</textarea>
+                <textarea wire:model.defer="observacion" rows="4" cols="54">{{ $observacion }}</textarea>
             </div>
             <table>
                 <tr>
@@ -105,7 +112,6 @@
                     </td>
                 </tr>
             </table>
-            {{ $foja_id }}
         @endif
     </x-table>
 
