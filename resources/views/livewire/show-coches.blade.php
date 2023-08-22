@@ -76,7 +76,6 @@
                         </th>
                     </tr>
                 </thead>
-                {{$cap_carga}}
                 <tbody class=" bg-white divide+y divide-gray-200">
                     @foreach ($coches as $coche)
                         <tr>

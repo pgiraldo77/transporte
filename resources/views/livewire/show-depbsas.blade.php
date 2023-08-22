@@ -189,7 +189,7 @@
 
         @endif
 
-        <div class="flex items-center justify-center h-screen py-4">
+        <div class="flex items-center justify-center  py-4">
             <form action="{{ route('fojas.create') }}" method="GET">
                 <button class=" button bottom-3 rounded-lg bg-blue-500"
                     wire:click="$emit('valorchecks',$suma)">Cargar</button>
