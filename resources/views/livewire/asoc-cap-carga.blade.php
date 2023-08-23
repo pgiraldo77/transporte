@@ -10,16 +10,22 @@
 
         <x-slot name="content">            
             <div class="mb-4">
-                    <label for="coche">Tipo :</label>
-                    <select id="coche" wire:change="selec_coche($event.target.value)">
+                    <label>Coche :</label>
+                <select id="coche" wire:change="selec_coche($event.target.value)">
                         <option value="">Seleccione Coche</option>
                         
                             @foreach ($coches as $c)
                             <option value="{{ $c->id }}">{{"(".$c->detalle.") ".$c->nro}}</option>
                             @endforeach
-                        
-                    </select>
-            </div> 
+              </div>          
+                    </select> 
+            {{--    <input type="text" wire:model="coche" value="{{$coche}}" placeholder="Buscar...">   
+                <ul>
+                    @foreach ($coches as $c)
+                        <li>{{"(".$c->detalle.") ".$c->nro}}</li>
+                    @endforeach
+                </ul> --}}
+            
 
             <div class="mb-4">
                 <label for="capacidad">Cap. Coche :</label>

@@ -158,12 +158,17 @@
             </table>
             <div>
                 <label value="completo">
-                    <input type="checkbox" wire:model.defer="completo" <?php if ($completo == 1) echo "checked"; ?> >
-                    {{ 'Incompleto' }}
+                   {{-- <input type="checkbox" wire:model.defer="completo" <?php if ($completo == 1) echo "checked"; ?> >
+                    {{ 'Incompleto' }} --}}
+                    <select id="estado" class="rounded-lg px-7 py-2">
+                        <option value="0">Completa</option>
+                        <option value="1">Parcial</option>
+                        <option value="2">Parcial / INAP</option>
+                    </select>
                 </label>
             </div>
             <div>
-                <textarea wire:model.defer="observacion" rows="4" cols="50">{{ $observacion }}</textarea>
+                <textarea class="rounded-lg px-2 py-2" wire:model.defer="observacion" rows="4" cols="50">{{ $observacion }}</textarea>
             </div>
             <table>
                 <tr>

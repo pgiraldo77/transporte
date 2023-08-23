@@ -10,6 +10,7 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Session;
 use App\Models\Foja_guia;
 use App\Models\Guia;
+use App\Models\Origen_dest;
 
 class CreateFojaRutas extends Component
 {
@@ -158,6 +159,13 @@ class CreateFojaRutas extends Component
                 'estado_id' => 0
             ]);     
         $foja=$foja_actual;    
+         Origen_dest::create([
+               'tabla'     => 'foja_rutas',
+               'tabla_id'  => $foja->id,
+                'subid'    => 0,
+                'emp_loco_id'  => 23,	
+                'emp_locd_id'  => 22
+         ]);
         }else{
             Foja_ruta::where('id', $foja->id)->update(['observacion' => $this->observacion, 'completo' => $this->completo]); 
         }    
