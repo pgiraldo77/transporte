@@ -23,9 +23,9 @@
                 @livewire('select-empresas',['valor'=>1])
             </div>
 
-            <div class="mb-4">
+          {{--  <div class="mb-4">
                 @livewire('create-empresa')
-            </div>
+            </div> --}}
             <div class="mb-4">
                 <x-label value="Número Remito" />
                 <x-input type="text" class="w-full" wire:model="nro"/>

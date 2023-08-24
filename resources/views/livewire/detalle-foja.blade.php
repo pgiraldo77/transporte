@@ -108,11 +108,11 @@
                         </div>
                     </td>
                     <td>
-
+                        <div>@livewire('asigna-coche')</div>
                     </td>
                 </tr>
             </table>
         @endif
+        
     </x-table>
-
 </div>

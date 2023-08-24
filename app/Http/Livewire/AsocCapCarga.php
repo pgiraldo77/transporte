@@ -23,6 +23,7 @@ public $coche_id,$cap_carga,$search;
     public function selec_coche($value){
         $this->coche_id=$value;
     }
+    
     public function selec_cap($value){
         $this->cap_carga=$value;
     }
